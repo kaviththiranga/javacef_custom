@@ -13,14 +13,8 @@ import org.eclipse.swt.widgets.Shell;
 
 public class SampleWindow {
 
-	public static void main(String[] args) {
-		single_browser();
-//		test_chromewindow_windows_only();
-//		test_chromewindow();
-//		test_ctabfolder();
-	}
 
-	static void single_browser() {
+	public static void single_browser(String URL) {
 		final Display display = new Display();
 		final Shell shell = new Shell(display);
 		shell.setLayout(new FillLayout());
@@ -35,7 +29,7 @@ public class SampleWindow {
 		if (System.getProperty("os.name").equals("Linux"))
 			linux_fix_before(display);
 
-		Chromium c = new Chromium(shell, SWT.NONE, "google.com");
+		Chromium c = new Chromium(shell, SWT.NONE, URL);
 		c.addTitleChangeListener(new TitleChangeListener() {
 			public void TitleChanged(String title, Chromium browser) {
 				shell.setText(title);

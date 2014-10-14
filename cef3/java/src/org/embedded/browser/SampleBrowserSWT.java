@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Shell;
  * same time on Mac. Both Mac and Linux do not support multiple SWT Displays.
  */
 public class SampleBrowserSWT {
-	public static void main(String[] args) {
+	public static void load() {
 		final Display display = new Display();
 		Shell shell_control = new Shell(display);
 		shell_control.setLayout(new GridLayout(2, true));

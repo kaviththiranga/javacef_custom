@@ -40,7 +40,7 @@ JNIEXPORT void JNICALL Java_org_embedded_browser_Chromium_browser_1init
   CefRefPtr<ClientApp> app(new ClientApp);
 
   // Retrieve the current working directory.
-  szWorkingDir = getenv("JAVACEF_PATH");
+  szWorkingDir = getenv("WSO2_DEVELOPER_STUDIO_PATH");
   if (!szWorkingDir)
     szWorkingDir = (char*)calloc(1, sizeof(char));
 
@@ -54,17 +54,18 @@ JNIEXPORT void JNICALL Java_org_embedded_browser_Chromium_browser_1init
 
   settings.multi_threaded_message_loop = message_loop;
   settings.log_severity = LOGSEVERITY_DISABLE;
+  settings.no_sandbox = true;
 
   CefString path = CefString(szWorkingDir);
 
 #ifndef __LP64__
-  CefString(&settings.browser_subprocess_path) = path.ToString() + "/cef_runtime/linux32/cefclient";
-  CefString(&settings.resources_dir_path) = path.ToString() + "/cef_runtime/linux32";
-  CefString(&settings.locales_dir_path) = path.ToString() + "/cef_runtime/linux32/locales";
+  CefString(&settings.browser_subprocess_path) = path.ToString() + "/cef/cefclient";
+  CefString(&settings.resources_dir_path) = path.ToString() + "/cef";
+  CefString(&settings.locales_dir_path) = path.ToString() + "/cef/locales";
 #else
-  CefString(&settings.browser_subprocess_path) = path.ToString() + "/cef_runtime/linux64/cefclient";
-  CefString(&settings.resources_dir_path) = path.ToString() + "/cef_runtime/linux64";
-  CefString(&settings.locales_dir_path) = path.ToString() + "/cef_runtime/linux64/locales";
+  CefString(&settings.browser_subprocess_path) = path.ToString() + "/cef/cefclient";
+  CefString(&settings.resources_dir_path) = path.ToString() + "/cef";
+  CefString(&settings.locales_dir_path) = path.ToString() + "/cef/locales";
 #endif
 
   BackupSignalHandlers();
