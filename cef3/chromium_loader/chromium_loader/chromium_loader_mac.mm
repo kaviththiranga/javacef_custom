@@ -87,7 +87,7 @@ JNIEXPORT void JNICALL Java_org_embedded_browser_Chromium_browser_1init
   CefRefPtr<ClientApp> app(new ClientApp);
 
   // Retrieve the current working directory.
-  szWorkingDir = getenv("JAVACEF_PATH");
+  szWorkingDir = getenv("WSO2_DEVELOPER_STUDIO_PATH");
   if (!szWorkingDir)
     szWorkingDir = (char*)calloc(1, sizeof(char));
 
@@ -101,17 +101,18 @@ JNIEXPORT void JNICALL Java_org_embedded_browser_Chromium_browser_1init
 
   settings.multi_threaded_message_loop = message_loop;
   settings.log_severity = LOGSEVERITY_DISABLE;
+  settings.no_sandbox = true;
 
   CefString path = CefString(szWorkingDir);
 
 #ifndef __LP64__
-  CefString(&settings.browser_subprocess_path) = path.ToString() + "/cef_runtime/mac32/cefclient.app/Contents/Frameworks/cefclient Helper.app/Contents/MacOS/cefclient Helper";
-  CefString(&settings.resources_dir_path) = path.ToString() + "/cef_runtime/mac32/cefclient.app/Contents/Frameworks/Chromium Embedded Framework.framework/Resources";
+  CefString(&settings.browser_subprocess_path) = path.ToString() + "/cef/cefclient.app/Contents/Frameworks/cefclient Helper.app/Contents/MacOS/cefclient Helper";
+  CefString(&settings.resources_dir_path) = path.ToString() + "/cef/cefclient.app/Contents/Frameworks/Chromium Embedded Framework.framework/Resources";
 #else
-  CefString(&settings.browser_subprocess_path) = path.ToString() + "/cef_runtime/mac64/cefclient.app/Contents/Frameworks/cefclient Helper.app/Contents/MacOS/cefclient Helper";
+  CefString(&settings.browser_subprocess_path) = path.ToString() + "/cef/cefclient.app/Contents/Frameworks/cefclient Helper.app/Contents/MacOS/cefclient Helper";
 
   // Need to set the path to find devtools resources.
-  CefString(&settings.resources_dir_path) = path.ToString() + "/cef_runtime/mac64/cefclient.app/Contents/Frameworks/Chromium Embedded Framework.framework/Resources";
+  CefString(&settings.resources_dir_path) = path.ToString() + "/cef/cefclient.app/Contents/Frameworks/Chromium Embedded Framework.framework/Resources";
 #endif
 
   BackupSignalHandlers();

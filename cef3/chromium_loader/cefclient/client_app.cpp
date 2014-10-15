@@ -163,20 +163,14 @@ void ClientApp::OnBeforeCommandLineProcessing(
 #if defined(OS_MACOSX)
   //command_line->AppendSwitch("use-core-animation");
 
-  char* szWorkingDir = getenv("JAVACEF_PATH");
+  char* szWorkingDir = getenv("WSO2_DEVELOPER_STUDIO_PATH");
   if (!szWorkingDir)
     return;
 
   std::string path(szWorkingDir);
   std::string locale;
 
-#if defined(__LP64__)
-  locale = path + "/cef_runtime/mac64";
-#else
-  locale = path + "/cef_runtime/mac32";
-#endif
-
-  locale += "/cefclient.app/Contents/Frameworks/Chromium Embedded Framework.framework/Resources/en.lproj/locale.pak";
+  locale = "/cef/cefclient.app/Contents/Frameworks/Chromium Embedded Framework.framework/Resources/en.lproj/locale.pak";
   command_line->AppendSwitchWithValue("locale_pak", locale);
 #endif
 }
