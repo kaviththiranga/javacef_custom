@@ -170,7 +170,7 @@ void ClientApp::OnBeforeCommandLineProcessing(
   std::string path(szWorkingDir);
   std::string locale;
 
-  locale = "/cef/cefclient.app/Contents/Frameworks/Chromium Embedded Framework.framework/Resources/en.lproj/locale.pak";
+  locale = path + "/cef/cefclient.app/Contents/Frameworks/Chromium Embedded Framework.framework/Resources/en.lproj/locale.pak";
   command_line->AppendSwitchWithValue("locale_pak", locale);
 #endif
 }
