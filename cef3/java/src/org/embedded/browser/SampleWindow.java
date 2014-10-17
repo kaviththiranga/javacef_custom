@@ -32,7 +32,7 @@ public class SampleWindow {
 		Chromium c = new Chromium(shell, SWT.NONE, URL);
 		c.addTitleChangeListener(new TitleChangeListener() {
 			public void TitleChanged(String title, Chromium browser) {
-				shell.setText(title);
+				shell.setText("WSO2 Developer Studio");
 			}
 		});
 		shell.open();
