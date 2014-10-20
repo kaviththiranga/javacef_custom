@@ -10,6 +10,8 @@ import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Monitor;
 
 public class SampleWindow {
 
@@ -18,6 +20,15 @@ public class SampleWindow {
 		final Display display = new Display();
 		final Shell shell = new Shell(display);
 		shell.setLayout(new FillLayout());
+		
+		Monitor primary = display.getPrimaryMonitor();
+		Rectangle bounds = primary.getBounds();
+		Rectangle rect = shell.getBounds();
+
+		int x = bounds.x + (bounds.width - rect.width) / 2;
+		int y = bounds.y + (bounds.height - rect.height) / 2;
+
+		shell.setLocation(x, y);
 
 		/**
 		 * single_browser() works without the following fix on Linux,
