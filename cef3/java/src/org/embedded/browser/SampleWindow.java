@@ -16,7 +16,7 @@ import org.eclipse.swt.graphics.Image;
 import java.io.File;
 
 public class SampleWindow {
-	
+
 	public static final String STUDIO_ROOT_ENV_VAR_NAME = "WSO2_DEVELOPER_STUDIO_PATH";
 
 
@@ -28,10 +28,15 @@ public class SampleWindow {
 		final Shell shell = new Shell(display);
 		shell.setLayout(new FillLayout());
 
-		String rootDir = System.getenv(STUDIO_ROOT_ENV_VAR_NAME);
- 		Image small = new Image(display, rootDir + File.separator + "icon.png");
-		shell.setImage(small);
-		
+		String iconRoot = System.getenv(STUDIO_ROOT_ENV_VAR_NAME) + File.separator + "icons";
+
+		Image icon32 = new Image(display, iconRoot + File.separator + "icon-32.png");
+		Image icon64 = new Image(display, iconRoot + File.separator + "icon-64.png");
+		Image icon128 = new Image(display, iconRoot + File.separator + "icon-128.png");
+		Image icon256 = new Image(display, iconRoot + File.separator + "icon-256.png");
+
+		shell.setImages(new Image[]{icon32, icon64, icon128, icon128});
+
 		Monitor primary = display.getPrimaryMonitor();
 		Rectangle bounds = primary.getBounds();
 		Rectangle rect = shell.getBounds();
@@ -67,7 +72,7 @@ public class SampleWindow {
 		if (System.getProperty("os.name").equals("Linux"))
 			linux_fix_after(display);
 	}
-	
+
 	static void linux_fix_before(Display display) {
 		Shell shell_background = new Shell(display);
 		new Chromium(shell_background, SWT.NONE);
@@ -76,14 +81,14 @@ public class SampleWindow {
 		shell_background.setVisible(false);
 		display.setData("linux_fix_shell", shell_background);
 	}
-	
+
 	static void linux_fix_after(Display display) {
 		Shell shell_background = (Shell) display.getData("linux_fix_shell");
 		if (shell_background != null) {
 			shell_background.close();
 		}
 	}
-	
+
 	/**
 	 * Not available on Mac and Linux: Use test_chromewindow() or
 	 * SampleBrowserSWT instead.
@@ -93,7 +98,7 @@ public class SampleWindow {
 		ChromeWindow.loadUrl("google.com");
 		ChromeWindow.loadUrl("google.com");
 	}
-	
+
 	/**
 	 * This function supports all platforms, but it uses private fields
 	 * (ChromeWindow.window).
@@ -101,18 +106,18 @@ public class SampleWindow {
 	static void test_chromewindow() {
 		Display display = new Display();
 		ChromeWindow.setSharedDisplay(display);
-		
+
 		ChromeWindow.loadUrl("google.com");
 		ChromeWindow.loadUrl("google.com");
 		ChromeWindow.loadUrl("google.com");
-		
+
 		while (!ChromeWindow.window.shell.isDisposed())
 			if (!display.readAndDispatch())
 				display.sleep();
-		
+
 		ChromeWindow.Shutdown();
 	}
-	
+
 	static void setFocus(CTabFolder folder) {
 		try {
 			if (folder.isDisposed() || folder.getItemCount() == 0)
