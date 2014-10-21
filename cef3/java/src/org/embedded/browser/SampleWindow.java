@@ -35,7 +35,7 @@ public class SampleWindow {
 		Image icon128 = new Image(display, iconRoot + File.separator + "icon-128.png");
 		Image icon256 = new Image(display, iconRoot + File.separator + "icon-256.png");
 
-		shell.setImages(new Image[]{icon32, icon64, icon128, icon128});
+		shell.setImages(new Image[]{icon32, icon64, icon128, icon256});
 
 		Monitor primary = display.getPrimaryMonitor();
 		Rectangle bounds = primary.getBounds();
