@@ -12,14 +12,25 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Monitor;
+import org.eclipse.swt.graphics.Image;
+import java.io.File;
 
 public class SampleWindow {
+	
+	public static final String STUDIO_ROOT_ENV_VAR_NAME = "WSO2_DEVELOPER_STUDIO_PATH";
 
 
 	public static void single_browser(String URL) {
-		final Display display = new Display();
+
+
+		Display.setAppName("DevS");
+		final Display display = Display.getDefault();
 		final Shell shell = new Shell(display);
 		shell.setLayout(new FillLayout());
+
+		String rootDir = System.getenv(STUDIO_ROOT_ENV_VAR_NAME);
+ 		Image small = new Image(display, rootDir + File.separator + "icon.png");
+		shell.setImage(small);
 		
 		Monitor primary = display.getPrimaryMonitor();
 		Rectangle bounds = primary.getBounds();
